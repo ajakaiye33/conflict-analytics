@@ -1,0 +1,49 @@
+name: Visualize Performance Of Stocks On NGX
+on: [push]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+    - name: Set up Python 3.8
+      uses: actions/setup-python@v1
+      with:
+        python-version: 3.8
+    - name: Install dependencies
+      run: |
+        make install
+    - name: Lint with pylint
+      run: |
+        make lint
+    #- name: Test with pytest
+     # run: |
+      #  make test
+    - name: Format code
+      run: |
+        make format
+    - name: Build Container
+      run: |
+        make build
+        
+    - name: Heroku login credentials
+      run: |
+          cat > ~/.netrc <<EOF
+            machine api.heroku.com
+              login $HEROKU_EMAIL
+              password $HEROKU_API_KEY
+            machine git.heroku.com
+              login $HEROKU_EMAIL
+              password $HEROKU_API_KEY
+          EOF
+      env:
+          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+          HEROKU_EMAIL: ${{ secrets.HEROKU_EMAIL }}
+    - name: Add Heroku remote
+      run: heroku git:remote --app $HEROKU_APP_NAME
+      env:
+          HEROKU_APP_NAME: ${{ secrets.HEROKU_APP_NAME }}
+    - name: Push to Heroku
+      run: git push heroku master
+        
