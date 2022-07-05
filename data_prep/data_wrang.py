@@ -1,6 +1,8 @@
+"""
+Created on Tue Jun 17 00:59:25 2022
+@author: Hedgar Ajakaiye
+"""
 # import  packages/module
-from urllib.request import urlopen
-import json
 import pandas as pd
 import numpy as np
 from sklearn.cluster import KMeans
@@ -264,7 +266,7 @@ def geo_zone_death_now():
         .sort_values(by="norm_fatal", ascending=True)
     )
     return civil_killers_n
+    
 
-# print(clean_data['iso'])
 
-# print(counties['features'][0]['properties'])
+

@@ -1,1 +1,1 @@
-web: sh setup.sh && streamlit run conf_viz.py
+web: sh setup.sh && streamlit run conflict_analytics.py

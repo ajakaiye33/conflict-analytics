@@ -1,4 +1,4 @@
-name: Visualize Performance Of Stocks On NGX
+name: Visualize Armed Conflict Against Civilians
 on: [push]
 jobs:
   build:

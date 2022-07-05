@@ -1,5 +1,5 @@
 """
-Created on Tue Jun 17 00:59:25 2021
+Created on Tue Jun 17 00:59:25 2022
 @author: Hedgar Ajakaiye
 """
 from urllib.request import urlopen
@@ -7,10 +7,11 @@ import json
 import streamlit as st
 import matplotlib
 import plotly.express as px
-import plotly.graph_objects as go
-import matplotlib.pyplot as plt
+
+# import plotly.graph_objects as go
+# import matplotlib.pyplot as plt
 from millify import prettify
-from data_prep.data_wrang import clean_data
+#from data_prep.data_wrang import clean_data
 from data_prep.data_wrang import civil_death_15
 from data_prep.data_wrang import civil_death_now
 from data_prep.data_wrang import killers_15
@@ -19,9 +20,8 @@ from data_prep.data_wrang import sum_death_15
 from data_prep.data_wrang import sum_death_now
 from data_prep.data_wrang import geo_zone_death_15
 from data_prep.data_wrang import geo_zone_death_now
-from data_prep.data_wrang import bycounties
 
-import streamlit.components.v1 as components
+# import streamlit.components.v1 as components
 
 
 matplotlib.use("agg")
@@ -53,11 +53,10 @@ footer {visibility: hidden;}
 )
 
 
-# st.title("NSE Live Dashboard")
-# st.text(
-# "Opens: Mon-Friday 10:00 - 2.30 WAT,"
-# "Data is delayed by at least 10 minutes"  # noqa
-# )
+#st.title("NSE Live Dashboard")
+st.text(
+    "Datat Source: ACLED https://acleddata.com/"
+    )
 
 death_cumu_civil = civil_death_15()
 civilian_death_till_date = civil_death_now()
@@ -94,10 +93,12 @@ def civilian_death_2015():
 def death_metric():
     death_metric1, death_metric2 = st.columns(2)
     death_metric1.metric(
-        label="Civilian Deaths or the past 16 Years", value=f"{prettify(sixteen_years_death)}"
+        label="Civilian Deaths for the past 16 Years",
+        value=f"{prettify(sixteen_years_death)}",
     )
     death_metric2.metric(
-        label="Civilian Deaths for the past 7 Years", value=f"{prettify(eight_years_deaths)}"
+        label="Civilian Deaths for the past 7 Years",
+        value=f"{prettify(eight_years_deaths)}",
     )
 
 
@@ -214,9 +215,6 @@ def conflict_map():
         fig.update_geos(fitbounds="locations", visible=False)
         fig.update_layout(margin={"r": 0, "t": 0, "l": 0, "b": 0})
         st.plotly_chart(fig)
-        
-        
-    
 
 
 if __name__ == "__main__":
