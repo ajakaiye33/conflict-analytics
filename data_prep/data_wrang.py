@@ -10,22 +10,24 @@ from scipy import stats
 import warnings
 
 warnings.simplefilter(action="ignore")
-import awswrangler as wr
+#import awswrangler as wr
+
+# universal data bucket
+# def extract_country_data(country="Nigeria"):
+# raw_data = (
+#     "s3://armed-conflict/1997-01-01-2022-06-20-Middle_Africa-Western_Africa.csv"
+# )
+# loaded_data = wr.s3.read_csv(raw_data)
+# filter_country = loaded_data[loaded_data["country"] == country]
+# return filter_country
 
 
-def extract_country_data(country="Nigeria"):
-    raw_data = (
-        "s3://armed-conflict/1997-01-01-2022-06-20-Middle_Africa-Western_Africa.csv"
-    )
-    loaded_data = wr.s3.read_csv(raw_data)
-    filter_country = loaded_data[loaded_data["country"] == country]
-    return filter_country
+# data = extract_country_data()
 
+# localize data for deployment
+# data = data.to_csv("./data/armed_conflict_data_june2022.csv", index=False)
 
-data = extract_country_data()
-# print(data.head(3))
-
-# clean country data
+data = pd.read_csv("./data/armed_conflict_data_june2022.csv")
 
 
 def clean_shape_data(df):
@@ -266,7 +268,3 @@ def geo_zone_death_now():
         .sort_values(by="norm_fatal", ascending=True)
     )
     return civil_killers_n
-    
-
-
-

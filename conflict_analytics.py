@@ -11,7 +11,8 @@ import plotly.express as px
 # import plotly.graph_objects as go
 # import matplotlib.pyplot as plt
 from millify import prettify
-#from data_prep.data_wrang import clean_data
+
+# from data_prep.data_wrang import clean_data
 from data_prep.data_wrang import civil_death_15
 from data_prep.data_wrang import civil_death_now
 from data_prep.data_wrang import killers_15
@@ -53,10 +54,8 @@ footer {visibility: hidden;}
 )
 
 
-#st.title("NSE Live Dashboard")
-st.text(
-    "Datat Source: ACLED https://acleddata.com/"
-    )
+# st.title("NSE Live Dashboard")
+st.text("Datat Source: ACLED https://acleddata.com/")
 
 death_cumu_civil = civil_death_15()
 civilian_death_till_date = civil_death_now()
