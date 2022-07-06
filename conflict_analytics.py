@@ -7,12 +7,7 @@ import json
 import streamlit as st
 import matplotlib
 import plotly.express as px
-
-# import plotly.graph_objects as go
-# import matplotlib.pyplot as plt
 from millify import prettify
-
-# from data_prep.data_wrang import clean_data
 from data_prep.data_wrang import civil_death_15
 from data_prep.data_wrang import civil_death_now
 from data_prep.data_wrang import killers_15
@@ -22,7 +17,6 @@ from data_prep.data_wrang import sum_death_now
 from data_prep.data_wrang import geo_zone_death_15
 from data_prep.data_wrang import geo_zone_death_now
 
-# import streamlit.components.v1 as components
 
 
 matplotlib.use("agg")
