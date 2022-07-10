@@ -10,7 +10,7 @@ from scipy import stats
 import warnings
 
 warnings.simplefilter(action="ignore")
-#import awswrangler as wr
+# import awswrangler as wr
 
 # universal data bucket
 # def extract_country_data(country="Nigeria"):
@@ -268,3 +268,60 @@ def geo_zone_death_now():
         .sort_values(by="norm_fatal", ascending=True)
     )
     return civil_killers_n
+
+
+def state_forces():
+    """
+    filter state forces personel killed in armed conflict
+    """
+    state_forces_df = clusters_data[
+        clusters_data["actor2"].isin(
+            [
+                "Military Forces of Nigeria (2015-)",
+                "Police Forces of Nigeria (2015-)",
+                "Police Forces of Niger (2021-)",
+                "Private Security Forces (Nigeria)",
+                "Police Forces of Nigeria (2015-) National Drug Law Enforcement Agency",
+                "Police Forces of Nigeria (2015-) Ogun State Community, Social Orientation and Safety Corps",
+                "Military Forces of Cameroon (1982-)",
+                "Police Forces of Nigeria (2015-) Nigeria Customs Service",
+                "Police Forces of Nigeria (2015-) Prison Guards",
+                "Police Forces of Nigeria (2015-) Department of State Services",
+                "Military Forces of Niger (2021-)",
+                "Police Forces of Nigeria (2015-) Lagos State Environmental and Special Offences Task Force",
+                "Military Forces of Nigeria (2015-) Joint Task Force",
+                "Police Forces of Nigeria (2015-) Special Anti-Robbery Squad",
+                "Police Forces of Nigeria (2015-) Customs Clearing Agents",
+                "Military Forces of Chad (1990-2021)",
+                "Police Forces of Nigeria (1999-2015)",
+                "Military Forces of Nigeria (1999-2015)",
+                "Military Forces of Nigeria (1999-2015) Joint Task Force",
+                "Police Forces of Nigeria (1999-2015) Prison Guards",
+                "Police Forces of Nigeria (1993-1999)",
+                "Military Forces of Nigeria (1993-1999)",
+            ]
+        )
+    ]
+    return state_forces_df
+
+
+state_forces_personnel = state_forces()
+
+
+def state_forces_15():
+    """
+    state forces personnel killed in the past 16 years
+    """
+    state_forcess_killed = state_forces_personnel[
+        (state_forces_personnel["year"] >= 1999)
+        & (state_forces_personnel["year"] <= 2015)
+    ]
+    return state_forcess_killed
+
+
+def state_forces_now():
+    """
+    state forces personel killed for the past 7 years
+    """
+    state_forces_killed = state_forces_personnel[state_forces_personnel["year"] >= 2015]
+    return state_forces_killed

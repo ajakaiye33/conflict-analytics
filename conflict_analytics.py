@@ -16,7 +16,8 @@ from data_prep.data_wrang import sum_death_15
 from data_prep.data_wrang import sum_death_now
 from data_prep.data_wrang import geo_zone_death_15
 from data_prep.data_wrang import geo_zone_death_now
-
+from data_prep.data_wrang import state_forces_15
+from data_prep.data_wrang import state_forces_now
 
 
 matplotlib.use("agg")
@@ -59,6 +60,8 @@ sixteen_years_death = sum_death_15()
 eight_years_deaths = sum_death_now()
 geo_15 = geo_zone_death_15()
 geo_now = geo_zone_death_now()
+force_15 = state_forces_15()
+force_now = state_forces_now()
 
 
 def civilian_death_2015():
@@ -68,7 +71,7 @@ def civilian_death_2015():
             death_cumu_civil,
             x="event_date",
             y="fatalities",
-            title="Civilian Deaths From Armed Conflict 1999-2015",
+            title="Innocent Civilians Deaths Trend 1999-2015",
             labels={"event_date": "Date", "fatalities": "Deaths"},
         )
         st.plotly_chart(fig, use_container_width=True)
@@ -77,7 +80,7 @@ def civilian_death_2015():
             civilian_death_till_date,
             x="event_date",
             y="fatalities",
-            title="Civilian Deaths From Armed Conflict 2015-2022",
+            title="Innocent Civilians Deaths Trend 2015-2022",
             labels={"event_date": "Date", "fatalities": "Deaths"},
         )
         st.plotly_chart(fig, use_container_width=True)
@@ -86,12 +89,28 @@ def civilian_death_2015():
 def death_metric():
     death_metric1, death_metric2 = st.columns(2)
     death_metric1.metric(
-        label="Civilian Deaths for the past 16 Years",
+        label="Innocent Civilians Murdered for the past 16 Years",
         value=f"{prettify(sixteen_years_death)}",
     )
     death_metric2.metric(
-        label="Civilian Deaths for the past 7 Years",
+        label="Innocent Civilian Murdered for the past 7 Years",
         value=f"{prettify(eight_years_deaths)}",
+    )
+
+
+metric_force_15 = force_15["fatalities"].sum()
+metric_force_now = force_now["fatalities"].sum()
+
+
+def state_forces_killed_metric():
+    state_force_16, state_force_7 = st.columns(2)
+    state_force_16.metric(
+        label="State Forces(Military & Police) Murdered for the past 16 years",
+        value=f"{prettify(metric_force_15)}",
+    )
+    state_force_7.metric(
+        label="State Forces(Military & Police) Murdered for the past 7 years",
+        value=f"{prettify(metric_force_now)}",
     )
 
 
@@ -114,6 +133,26 @@ def killerz():
             path=["state", "actor1"],
             values="norm_fatal",
             title="Civilian Killers By State 2015-2022",
+        )
+        st.plotly_chart(fig, use_container_width=True)
+
+
+def state_forces_killers():
+    pre_state_killers, now_state_killers = st.columns(2)
+    with pre_state_killers:
+        fig = px.sunburst(
+            force_15,
+            path=["state", "actor1"],
+            values="norm_fatal",
+            title="State Forces Killer by State 1999-2015",
+        )
+        st.plotly_chart(fig, use_container_width=True)
+    with now_state_killers:
+        fig = px.sunburst(
+            force_now,
+            path=["state", "actor1"],
+            values="norm_fatal",
+            title="State Forces Killers by State 2015-2022",
         )
         st.plotly_chart(fig, use_container_width=True)
 
@@ -213,7 +252,9 @@ def conflict_map():
 if __name__ == "__main__":
     civilian_death_2015()
     death_metric()
+    state_forces_killed_metric()
     killerz()
+    state_forces_killers()
     killers_sharia_state()
     geo_risk()
     conflict_map()
