@@ -1,6 +1,8 @@
+[![Visualize Armed Conflict Against Civilians](https://github.com/ajakaiye33/conflict-analytics/actions/workflows/main.yml/badge.svg)](https://github.com/ajakaiye33/conflict-analytics/actions/workflows/main.yml)
+
 ## Armed Conflict Analytics
 
-This project takes an indepth analysis and  exploration of the  Armed Conflcit ![Data]("https://acleddata.com/#/dashboard") with particular 
+This project takes an indepth analysis and  exploration of the  Armed Conflcit ![Data](https://acleddata.com/#/dashboard) with particular 
 attention to the senseless killings/murders of innocent civilians in Nigeria.
 
 ### Critical Questions
@@ -18,4 +20,4 @@ The exploration seeks to answer the following questions:
 We have  tried to  answer these  questions and many more from a  data driven perspective through simple  visualizations.
 
 
-![]("./images/dashboard.png")
+![](./images/dashboard.png)
