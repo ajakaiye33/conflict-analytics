@@ -31,6 +31,9 @@ data = pd.read_csv("./data/armed_conflict_data_june2022.csv")
 
 
 def clean_shape_data(df):
+    """
+    clean and transform data
+    """
     df = df.drop(
         [
             "data_id",

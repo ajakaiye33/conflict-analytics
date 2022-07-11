@@ -65,6 +65,9 @@ force_now = state_forces_now()
 
 
 def civilian_death_2015():
+    """
+    Visualize innocent citizen murdered over the years
+    """
     pre_bubu, now_bubu = st.columns(2)
     with pre_bubu:
         fig = px.line(
@@ -87,6 +90,9 @@ def civilian_death_2015():
 
 
 def death_metric():
+    """
+    Number of innocent citizens murdered over the years
+    """
     death_metric1, death_metric2 = st.columns(2)
     death_metric1.metric(
         label="Innocent Civilians Murdered for the past 16 Years",
@@ -103,6 +109,9 @@ metric_force_now = force_now["fatalities"].sum()
 
 
 def state_forces_killed_metric():
+    """
+    Number of state forces-military and police that have been murdered over the  years
+    """
     state_force_16, state_force_7 = st.columns(2)
     state_force_16.metric(
         label="State Forces(Military & Police) Murdered for the past 16 years",
@@ -115,6 +124,9 @@ def state_forces_killed_metric():
 
 
 def killerz():
+    """
+    Visualize the actors-killers of innocent citizens 
+    """
     (
         prebubu_kilers,
         bubu_killers,
@@ -138,6 +150,9 @@ def killerz():
 
 
 def state_forces_killers():
+    """
+    visualize state forces- miliitary and police deaths in  armed conflict
+    """
     pre_state_killers, now_state_killers = st.columns(2)
     with pre_state_killers:
         fig = px.sunburst(
@@ -158,6 +173,9 @@ def state_forces_killers():
 
 
 def killers_sharia_state():
+    """
+    Visualize the impact of sharia status on Fatalities across states
+    """
     pre_bubu_sharia, bubu_killers_sharia = st.columns(2)
     with pre_bubu_sharia:
         fig = px.sunburst(
@@ -216,6 +234,9 @@ bycounties_bu = bubu.groupby("state").agg({"norm_fatal": "sum"}).reset_index()
 
 
 def conflict_map():
+    """
+    Visualize fatalities across states on the  Nigeria Map
+    """
     map_prebubu, map_bubu = st.columns(2)
     with map_prebubu:
         fig = px.choropleth(
