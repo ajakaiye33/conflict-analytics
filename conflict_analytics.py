@@ -95,11 +95,11 @@ def death_metric():
     """
     death_metric1, death_metric2 = st.columns(2)
     death_metric1.metric(
-        label="Innocent Civilians Murdered for the past 16 Years",
+        label="Innocent Civilians Murdered in the past 16 Years",
         value=f"{prettify(sixteen_years_death)}",
     )
     death_metric2.metric(
-        label="Innocent Civilian Murdered for the past 7 Years",
+        label="Innocent Civilian Murdered in the past 7 Years",
         value=f"{prettify(eight_years_deaths)}",
     )
 
@@ -114,11 +114,11 @@ def state_forces_killed_metric():
     """
     state_force_16, state_force_7 = st.columns(2)
     state_force_16.metric(
-        label="State Forces(Military & Police) Murdered for the past 16 years",
+        label="State Forces(Military & Police) Murdered in the past 16 years",
         value=f"{prettify(metric_force_15)}",
     )
     state_force_7.metric(
-        label="State Forces(Military & Police) Murdered for the past 7 years",
+        label="State Forces(Military & Police) Murdered in the past 7 years",
         value=f"{prettify(metric_force_now)}",
     )
 
@@ -159,7 +159,7 @@ def state_forces_killers():
             force_15,
             path=["state", "actor1"],
             values="norm_fatal",
-            title="State Forces Killer by State 1999-2015",
+            title="State Forces Killers by State 1999-2015",
         )
         st.plotly_chart(fig, use_container_width=True)
     with now_state_killers:
