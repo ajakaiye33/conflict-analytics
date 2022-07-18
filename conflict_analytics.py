@@ -52,22 +52,15 @@ footer {visibility: hidden;}
 # st.title("NSE Live Dashboard")
 st.text("Datat Source: ACLED https://acleddata.com/")
 
-death_cumu_civil = civil_death_15()
-civilian_death_till_date = civil_death_now()
-pre_bu = killers_15()
-bubu = killers_now()
-sixteen_years_death = sum_death_15()
-eight_years_deaths = sum_death_now()
-geo_15 = geo_zone_death_15()
-geo_now = geo_zone_death_now()
-force_15 = state_forces_15()
-force_now = state_forces_now()
+
 
 
 def civilian_death_2015():
     """
     Visualize innocent citizen murdered over the years
     """
+    death_cumu_civil = civil_death_15()
+    civilian_death_till_date = civil_death_now()
     pre_bubu, now_bubu = st.columns(2)
     with pre_bubu:
         fig = px.line(
@@ -93,6 +86,8 @@ def death_metric():
     """
     Number of innocent citizens murdered over the years
     """
+    sixteen_years_death = sum_death_15()
+    eight_years_deaths = sum_death_now()
     death_metric1, death_metric2 = st.columns(2)
     death_metric1.metric(
         label="Innocent Civilians Murdered in the past 16 Years",
@@ -104,14 +99,17 @@ def death_metric():
     )
 
 
-metric_force_15 = force_15["fatalities"].sum()
-metric_force_now = force_now["fatalities"].sum()
+
 
 
 def state_forces_killed_metric():
     """
     Number of state forces-military and police that have been murdered over the  years
     """
+    force_15 = state_forces_15()
+    force_now = state_forces_now()
+    metric_force_15 = force_15["fatalities"].sum()
+    metric_force_now = force_now["fatalities"].sum()
     state_force_16, state_force_7 = st.columns(2)
     state_force_16.metric(
         label="State Forces(Military & Police) Murdered in the past 16 years",
@@ -127,6 +125,8 @@ def killerz():
     """
     Visualize the actors-killers of innocent citizens 
     """
+    pre_bu = killers_15()
+    bubu = killers_now()
     (
         prebubu_kilers,
         bubu_killers,
@@ -153,6 +153,8 @@ def state_forces_killers():
     """
     visualize state forces- miliitary and police deaths in  armed conflict
     """
+    force_15 = state_forces_15()
+    force_now = state_forces_now()
     pre_state_killers, now_state_killers = st.columns(2)
     with pre_state_killers:
         fig = px.sunburst(
@@ -176,6 +178,8 @@ def killers_sharia_state():
     """
     Visualize the impact of sharia status on Fatalities across states
     """
+    pre_bu = killers_15()
+    bubu = killers_now()
     pre_bubu_sharia, bubu_killers_sharia = st.columns(2)
     with pre_bubu_sharia:
         fig = px.sunburst(
@@ -200,6 +204,8 @@ def geo_risk():
     """
     visualize civilian deaths from armed conflict by geopolitical zones and by risk status
     """
+    geo_15 = geo_zone_death_15()
+    geo_now = geo_zone_death_now()
     geo_16, geo_8 = st.columns(2)
 
     with geo_16:
@@ -229,14 +235,17 @@ with urlopen(
 ) as response:
     states = json.load(response)
 
-bycounties = pre_bu.groupby("state").agg({"norm_fatal": "sum"}).reset_index()
-bycounties_bu = bubu.groupby("state").agg({"norm_fatal": "sum"}).reset_index()
+
 
 
 def conflict_map():
     """
     Visualize fatalities across states on the  Nigeria Map
     """
+    pre_bu = killers_15()
+    bubu = killers_now()
+    bycounties = pre_bu.groupby("state").agg({"norm_fatal": "sum"}).reset_index()
+    bycounties_bu = bubu.groupby("state").agg({"norm_fatal": "sum"}).reset_index()
     map_prebubu, map_bubu = st.columns(2)
     with map_prebubu:
         fig = px.choropleth(
