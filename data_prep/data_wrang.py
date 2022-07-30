@@ -12,10 +12,11 @@ import warnings
 warnings.simplefilter(action="ignore")
 # import awswrangler as wr
 
+
 # universal data bucket
 # def extract_country_data(country="Nigeria"):
 # raw_data = (
-#     "s3://armed-conflict/1997-01-01-2022-06-20-Middle_Africa-Western_Africa.csv"
+#    "s3://armed-conflict/22-07-2022.csv"
 # )
 # loaded_data = wr.s3.read_csv(raw_data)
 # filter_country = loaded_data[loaded_data["country"] == country]
@@ -25,9 +26,9 @@ warnings.simplefilter(action="ignore")
 # data = extract_country_data()
 
 # localize data for deployment
-# data = data.to_csv("./data/armed_conflict_data_june2022.csv", index=False)
+# data = data.to_csv("./data/armed_conflict_data_july2022.csv", index=False)
 
-data = pd.read_csv("./data/armed_conflict_data_june2022.csv")
+data = pd.read_csv("./data/armed_conflict_data_july2022.csv")
 
 
 def clean_shape_data(df):

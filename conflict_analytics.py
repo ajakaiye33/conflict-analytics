@@ -50,9 +50,7 @@ footer {visibility: hidden;}
 
 
 # st.title("NSE Live Dashboard")
-st.text("Datat Source: ACLED https://acleddata.com/")
-
-
+st.text("Datat Source: ACLED https://acleddata.com/ Last updated:22-07-2022")
 
 
 def civilian_death_2015():
@@ -71,6 +69,7 @@ def civilian_death_2015():
             labels={"event_date": "Date", "fatalities": "Deaths"},
         )
         st.plotly_chart(fig, use_container_width=True)
+
     with now_bubu:
         fig = px.line(
             civilian_death_till_date,
@@ -99,9 +98,6 @@ def death_metric():
     )
 
 
-
-
-
 def state_forces_killed_metric():
     """
     Number of state forces-military and police that have been murdered over the  years
@@ -123,7 +119,7 @@ def state_forces_killed_metric():
 
 def killerz():
     """
-    Visualize the actors-killers of innocent citizens 
+    Visualize the actors-killers of innocent citizens
     """
     pre_bu = killers_15()
     bubu = killers_now()
@@ -234,8 +230,6 @@ with urlopen(
     "https://gist.githubusercontent.com/sdwfrost/6c0ccf457e30963292522dc57ed1fe7a/raw/4023566e3b23d6a518d3c88d35b97ded46756544/nigeria_states.geojson"
 ) as response:
     states = json.load(response)
-
-
 
 
 def conflict_map():
