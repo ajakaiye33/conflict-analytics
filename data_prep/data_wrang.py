@@ -364,16 +364,26 @@ def military_expend():
 
 mil_expend_data = military_expend()
 
+def cumu_mil_expediture(df):
+    df["amounts"] = df["amount"].cumsum()
+    return df
+
+cumulative_expend = cumu_mil_expediture(mil_expend_data)
+
 
 def military_expend_15():
-    filter_data = mil_expend_data[
-        (mil_expend_data["calendar_year"] >= 1999)
-        & (mil_expend_data["calendar_year"] <= 2014)
+    filter_data = cumulative_expend[
+        (cumulative_expend["calendar_year"] >= 1999)
+        & (cumulative_expend["calendar_year"] <= 2014)
     ]
-    # sum_expend = filter_data['amount'].sum()
     return filter_data
 
 
 def military_expend_now():
-    filter_data = mil_expend_data[mil_expend_data["calendar_year"] >= 2015]
+    filter_data = cumulative_expend[cumulative_expend["calendar_year"] >= 2015]
     return filter_data
+
+mil_exp_15 = military_expend_15()
+mil_exp_now = military_expend_now()
+
+
