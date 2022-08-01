@@ -329,3 +329,51 @@ def state_forces_now():
     """
     state_forces_killed = state_forces_personnel[state_forces_personnel["year"] >= 2015]
     return state_forces_killed
+
+
+def military_expend():
+    mil_exp = pd.read_excel(
+        "./data/SIPRI-Milex-data-1949-2021.xlsx", sheet_name=2, header=6
+    )
+    prepro0 = mil_exp.iloc[3:, :]
+    prepro1 = prepro0.drop(
+        [
+            "Notes",
+            "Currency",
+            "Country",
+            1949,
+            1950,
+            1951,
+            1952,
+            1953,
+            1954,
+            1955,
+            1956,
+            1957,
+            1958,
+            1959,
+        ],
+        axis=1,
+    )
+    tidy_data = prepro1.melt(var_name="calendar_year", value_name="amount")
+    return tidy_data
+
+
+# tidy_data_clean = tidy_data.drop(['Country'],axis=1)
+# tidy_data_clean
+
+mil_expend_data = military_expend()
+
+
+def military_expend_15():
+    filter_data = mil_expend_data[
+        (mil_expend_data["calendar_year"] >= 1999)
+        & (mil_expend_data["calendar_year"] <= 2014)
+    ]
+    # sum_expend = filter_data['amount'].sum()
+    return filter_data
+
+
+def military_expend_now():
+    filter_data = mil_expend_data[mil_expend_data["calendar_year"] >= 2015]
+    return filter_data

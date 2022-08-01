@@ -18,6 +18,8 @@ from data_prep.data_wrang import geo_zone_death_15
 from data_prep.data_wrang import geo_zone_death_now
 from data_prep.data_wrang import state_forces_15
 from data_prep.data_wrang import state_forces_now
+from data_prep.data_wrang import military_expend_15
+from data_prep.data_wrang import military_expend_now
 
 
 matplotlib.use("agg")
@@ -50,7 +52,9 @@ footer {visibility: hidden;}
 
 
 # st.title("NSE Live Dashboard")
-st.text("Datat Source: ACLED https://acleddata.com/ Last updated:22-07-2022")
+st.text(
+    "Datat Sources:1.ACLED https://acleddata.com/, 2.https://sipri.org/databases/milex; Last updated:22-07-2022"
+)
 
 
 def civilian_death_2015():
@@ -114,6 +118,46 @@ def state_forces_killed_metric():
     state_force_7.metric(
         label="State Forces(Military & Police) Murdered in the past 7 years",
         value=f"{prettify(metric_force_now)}",
+    )
+
+
+def military_expenditure_viz():
+    pre_buhari_regime = military_expend_15()
+    buhari_regime = military_expend_now()
+    then_expen, now_expend = st.columns(2)
+    with then_expen:
+        fig = px.line(
+            pre_buhari_regime,
+            x="amount",
+            y="calendar_year",
+            title="Expenditure on the Military Trend 1999-2014",
+            labels={"amount": "Amount", "calendar_year": "Year"},
+        )
+        st.plotly_chart(fig)
+    with now_expend:
+        fig = px.line(
+            buhari_regime,
+            x="amount",
+            y="calendar_year",
+            title="Expenditure on the Military Trend 2015-2021",
+            labels={"amount": "Amount", "calendar_year": "Year"},
+        )
+        st.plotly_chart(fig)
+
+
+def military_expend_metric():
+    pre_buhari_regime = military_expend_15()
+    buhari_regime = military_expend_now()
+    sum_prev_regime_data = pre_buhari_regime["amount"].sum()
+    sum_current_regime_data = buhari_regime["amount"].sum()
+    military_spend_metric1, military_spend_metric_2 = st.columns(2)
+    military_spend_metric1.metric(
+        label="Amount spent on Military 1999-2014",
+        value=f"{prettify(round(sum_prev_regime_data,2))}",
+    )
+    military_spend_metric_2.metric(
+        label="Amount spent on Miliary 2015-2021",
+        value=f"{prettify(round(sum_current_regime_data,2))}",
     )
 
 
@@ -276,6 +320,8 @@ def conflict_map():
 if __name__ == "__main__":
     civilian_death_2015()
     death_metric()
+    military_expenditure_viz()
+    military_expend_metric()
     state_forces_killed_metric()
     killerz()
     state_forces_killers()
