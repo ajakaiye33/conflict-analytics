@@ -123,6 +123,9 @@ def state_forces_killed_metric():
 
 
 def military_expenditure_viz():
+    """
+    Visualize Military expenditure over the years
+    """
     pre_buhari_regime = military_expend_15()
     buhari_regime = military_expend_now()
     then_expen, now_expend = st.columns(2)
@@ -147,6 +150,9 @@ def military_expenditure_viz():
 
 
 def military_expend_metric():
+    """
+    Military expenditure metrics
+    """
     pre_buhari_regime = military_expend_15()
     buhari_regime = military_expend_now()
     sum_prev_regime_data = pre_buhari_regime["amount"].sum()
@@ -154,11 +160,11 @@ def military_expend_metric():
     military_spend_metric1, military_spend_metric_2 = st.columns(2)
     military_spend_metric1.metric(
         label="Amount spent on Military 1999-2014",
-        value=f"{prettify(round(sum_prev_regime_data,2))}",
+        value=f"{prettify(round(sum_prev_regime_data,2))} Naira",
     )
     military_spend_metric_2.metric(
         label="Amount spent on Miliary 2015-2021",
-        value=f"{prettify(round(sum_current_regime_data,2))}",
+        value=f"{prettify(round(sum_current_regime_data,2))} Naira",
     )
 
 

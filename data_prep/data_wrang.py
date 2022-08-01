@@ -332,6 +332,9 @@ def state_forces_now():
 
 
 def military_expend():
+    """
+    Clean and process military expenditure data
+    """
     mil_exp = pd.read_excel(
         "./data/SIPRI-Milex-data-1949-2021.xlsx", sheet_name=2, header=6
     )
@@ -359,12 +362,12 @@ def military_expend():
     return tidy_data
 
 
-# tidy_data_clean = tidy_data.drop(['Country'],axis=1)
-# tidy_data_clean
-
 mil_expend_data = military_expend()
 
 def cumu_mil_expediture(df):
+    """
+    Military expenditur cumulative
+    """
     df["amounts"] = df["amount"].cumsum()
     return df
 
@@ -372,6 +375,9 @@ cumulative_expend = cumu_mil_expediture(mil_expend_data)
 
 
 def military_expend_15():
+    """
+    Military expenditure from 1999-2014
+    """
     filter_data = cumulative_expend[
         (cumulative_expend["calendar_year"] >= 1999)
         & (cumulative_expend["calendar_year"] <= 2014)
@@ -380,10 +386,9 @@ def military_expend_15():
 
 
 def military_expend_now():
+    """
+    Military expenditure from 2015-2021
+    """
     filter_data = cumulative_expend[cumulative_expend["calendar_year"] >= 2015]
     return filter_data
-
-mil_exp_15 = military_expend_15()
-mil_exp_now = military_expend_now()
-
 
