@@ -22,7 +22,6 @@ from data_prep.data_wrang import military_expend_15
 from data_prep.data_wrang import military_expend_now
 
 
-
 matplotlib.use("agg")
 
 
@@ -132,8 +131,8 @@ def military_expenditure_viz():
     with then_expen:
         fig = px.line(
             pre_buhari_regime,
-            x="amounts",
-            y="calendar_year",
+            x="calendar_year",
+            y="amounts",
             title="Expenditure on the Military Trend 1999-2014",
             labels={"amounts": "Amount", "calendar_year": "Year"},
         )
@@ -141,8 +140,8 @@ def military_expenditure_viz():
     with now_expend:
         fig = px.line(
             buhari_regime,
-            x="amounts",
-            y="calendar_year",
+            x="calendar_year",
+            y="amounts",
             title="Expenditure on the Military Trend 2015-2021",
             labels={"amounts": "Amount", "calendar_year": "Year"},
         )
