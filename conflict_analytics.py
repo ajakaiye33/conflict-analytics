@@ -154,16 +154,16 @@ def military_expend_metric():
     """
     pre_buhari_regime = military_expend_15()
     buhari_regime = military_expend_now()
-    sum_prev_regime_data = pre_buhari_regime["amount"].sum()
-    sum_current_regime_data = buhari_regime["amount"].sum()
+    sum_prev_regime_data = pre_buhari_regime["amount"].sum()/1000000000000
+    sum_current_regime_data = buhari_regime["amount"].sum()/1000000000000
     military_spend_metric1, military_spend_metric_2 = st.columns(2)
     military_spend_metric1.metric(
         label="Amount spent on Military 1999-2014",
-        value=f"{prettify(round(sum_prev_regime_data,2))} Naira",
+        value=f"{prettify(round(sum_prev_regime_data,3))} Trillion Naira",
     )
     military_spend_metric_2.metric(
         label="Amount spent on Miliary 2015-2021",
-        value=f"{prettify(round(sum_current_regime_data,2))} Naira",
+        value=f"{prettify(round(sum_current_regime_data,3))} Trillion Naira",
     )
 
 

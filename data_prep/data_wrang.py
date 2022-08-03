@@ -392,3 +392,5 @@ def military_expend_now():
     """
     filter_data = cumulative_expend[cumulative_expend["calendar_year"] >= 2015]
     return filter_data
+    
+    
