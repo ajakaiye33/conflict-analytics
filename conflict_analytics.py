@@ -133,7 +133,7 @@ def military_expenditure_viz():
             pre_buhari_regime,
             x="calendar_year",
             y="amounts",
-            title="Expenditure on the Military Trend 1999-2014",
+            title="Expenditure on the Military 1999-2014",
             labels={"amounts": "Amount", "calendar_year": "Year"},
         )
         st.plotly_chart(fig)
@@ -142,7 +142,7 @@ def military_expenditure_viz():
             buhari_regime,
             x="calendar_year",
             y="amounts",
-            title="Expenditure on the Military Trend 2015-2021",
+            title="Expenditure on the Military 2015-2021",
             labels={"amounts": "Amount", "calendar_year": "Year"},
         )
         st.plotly_chart(fig)

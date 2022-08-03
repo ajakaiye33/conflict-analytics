@@ -87,7 +87,6 @@ def clean_shape_data(df):
     )
     df["actor2"] = df["actor2"].fillna("Suicide Bombers")
     df = df[df["fatalities"] >= 1]
-    # df['norm_fatal'] = (df['fatalities'] - df['fatalities'].min())/ (df['fatalities'].max() - df['fatalities'].min())
     df["norm_fatal"] = np.log(df["fatalities"])
     df["sharia_status"] = np.where(
         df["state"].isin(["Yobe", "Gombe", "Borno"]),
