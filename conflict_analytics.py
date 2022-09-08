@@ -53,7 +53,7 @@ footer {visibility: hidden;}
 
 # st.title("NSE Live Dashboard")
 st.text(
-    "Datat Sources:1.ACLED https://acleddata.com/, 2.https://sipri.org/databases/milex; Last updated:22-07-2022"
+    "Datat Sources:1.ACLED https://acleddata.com/, 2.https://sipri.org/databases/milex; Last updated:12-08-2022"
 )
 
 
