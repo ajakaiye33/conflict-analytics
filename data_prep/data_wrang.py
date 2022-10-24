@@ -10,12 +10,12 @@ from scipy import stats
 import warnings
 
 warnings.simplefilter(action="ignore")
-#import awswrangler as wr
+import awswrangler as wr
 
 
 # universal data bucket
 #def extract_country_data(country="Nigeria"):
-#    raw_data ="s3://armed-conflict/armed_conflict_august2022.csv"
+#    raw_data ="s3://armed-conflict/armed_conflict_data_october_2022.csv"
 #    loaded_data = wr.s3.read_csv(raw_data)
 #    filter_country = loaded_data[loaded_data["country"] == country]
 #    return filter_country
@@ -24,9 +24,9 @@ warnings.simplefilter(action="ignore")
 #data = extract_country_data()
 
 # localize data for deployment
-#data = data.to_csv("./data/armed_conflict_data_august2022.csv", index=False)
+#data = data.to_csv("./data/armed_conflict_data_october2022.csv", index=False)
 
-data = pd.read_csv("./data/armed_conflict_data_august2022.csv")
+data = pd.read_csv("./data/armed_conflict_data_october2022.csv")
 
 
 def clean_shape_data(df):
