@@ -10,7 +10,7 @@ from scipy import stats
 import warnings
 
 warnings.simplefilter(action="ignore")
-import awswrangler as wr
+#import awswrangler as wr
 
 
 # universal data bucket
