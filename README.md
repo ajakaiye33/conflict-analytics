@@ -26,5 +26,5 @@ We have  tried to  answer these  questions and many more from a  data driven per
 4. `streamlit run conflict_analytics.py`
 
 ![](./images/conflict_analytics-Streamlit.png)
-[](./images/conflict_analyticsStreamlit2.png)
-[](./images/conflict_analyticsStreamlit3.png)
+![](./images/conflict_analyticsStreamlit2.png)
+![](./images/conflict_analyticsStreamlit3.png)
