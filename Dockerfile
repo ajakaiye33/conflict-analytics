@@ -1,7 +1,8 @@
-FROM python:3.8.13-slim-buster
-EXPOSE 8501
+FROM python:3.10.11-slim-buster
 WORKDIR /conflict_analytics
 COPY requirements.txt ./requirements.txt
 RUN pip install -r requirements.txt
-COPY . .
-CMD streamlit run conflict_analytics.py 
+EXPOSE 8501
+COPY . /conflict_analytics
+#CMD streamlit run conflict_analytics.py
+ENTRYPOINT ["streamlit", "run", "conflict_analytics.py", "--server.port=8501"] 

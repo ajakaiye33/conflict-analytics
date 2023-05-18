@@ -10,23 +10,23 @@ from scipy import stats
 import warnings
 
 warnings.simplefilter(action="ignore")
-#import awswrangler as wr
+# import awswrangler as wr
 
 
-# universal data bucket
-#def extract_country_data(country="Nigeria"):
-#    raw_data ="s3://armed-conflict/armed_conflict_data_october_2022.csv"
+# # universal data bucket
+# def extract_country_data(country="Nigeria"):
+#    raw_data ="s3://armed-conflict/conflictasat28-05-2023.csv"
 #    loaded_data = wr.s3.read_csv(raw_data)
 #    filter_country = loaded_data[loaded_data["country"] == country]
 #    return filter_country
 
 
-#data = extract_country_data()
+# data = extract_country_data()
 
-# localize data for deployment
-#data = data.to_csv("./data/armed_conflict_data_october2022.csv", index=False)
+#localize data for deployment
+#data = data.to_csv("./data/armed_conflict_data_april2023.csv", index=False)
 
-data = pd.read_csv("./data/armed_conflict_data_october2022.csv")
+data = pd.read_csv("./data/armed_conflict_data_april2023.csv")
 
 
 def clean_shape_data(df):
@@ -35,7 +35,6 @@ def clean_shape_data(df):
     """
     df = df.drop(
         [
-            "data_id",
             "assoc_actor_1",
             "interaction",
             "admin3",
@@ -53,7 +52,7 @@ def clean_shape_data(df):
     df["dayofweek"] = df["event_date"].dt.dayofweek
     df["day"] = df["event_date"].dt.day
     df["month"] = df["event_date"].dt.month
-    df["weekofyear"] = df["event_date"].dt.weekofyear
+    df["weekofyear"] = df["event_date"].dt.isocalendar().week
     df["year"] = df["event_date"].dt.year
     df = df.rename(columns={"admin1": "state", "admin2": "lga"})
     df["daysofweek"] = df["dayofweek"].map(
