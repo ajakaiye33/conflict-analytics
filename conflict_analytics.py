@@ -259,7 +259,7 @@ def geo_risk():
             geo_15,
             x="norm_fatal",
             y="geopol_zones",
-            title="Civilian Death by Geopolitical Zone 1999-2015",
+            title="Civilian Deaths by Geopolitical Zone 1999-2015",
             labels={"geopol_zones": "Zones", "norm_fatal": "Civilian Deaths"},
             orientation="h",
         )
@@ -269,7 +269,7 @@ def geo_risk():
             geo_now,
             x="norm_fatal",
             y="geopol_zones",
-            title="Civilian Death By Geopolitical Zone 2015-2022",
+            title="Civilian Deaths By Geopolitical Zone 2015-2022",
             labels={"geopol_zones": "Zones", "norm_fatal": " Civilian Deaths"},
             orientation="h",
         )

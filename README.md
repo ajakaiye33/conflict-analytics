@@ -19,5 +19,12 @@ The exploration seeks to answer the following questions:
 
 We have  tried to  answer these  questions and many more from a  data driven perspective through simple  visualizations.
 
+### How to use
+1. `git clone https://github.com/ajakaiye33/conflict-analytics.git`
+2. `cd conflict-analytics`
+3. `make install`
+4. `streamlit run conflict_analytics.py`
 
-![](./images/dashboard.png)
+![](./images/conflict_analytics-Streamlit.png)
+[](./images/conflict_analyticsStreamlit2.png)
+[](./images/conflict_analyticsStreamlit3.png)
