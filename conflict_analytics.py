@@ -20,6 +20,7 @@ from data_prep.data_wrang import state_forces_15
 from data_prep.data_wrang import state_forces_now
 from data_prep.data_wrang import military_expend_15
 from data_prep.data_wrang import military_expend_now
+from data_prep.data_wrang import bkp_deaths
 
 
 matplotlib.use("agg")
@@ -79,7 +80,7 @@ def civilian_death_2015():
             civilian_death_till_date,
             x="event_date",
             y="fatalities",
-            title="Innocent Civilians Deaths Trend 2015-2022",
+            title="Innocent Civilians Deaths Trend 2015-2023",
             labels={"event_date": "Date", "fatalities": "Deaths"},
         )
         st.plotly_chart(fig, use_container_width=True)
@@ -97,7 +98,7 @@ def death_metric():
         value=f"{prettify(sixteen_years_death)}",
     )
     death_metric2.metric(
-        label="Innocent Civilian Murdered in the past 7 Years",
+        label="Innocent Civilian Murdered in the past 8 Years",
         value=f"{prettify(eight_years_deaths)}",
     )
 
@@ -116,7 +117,7 @@ def state_forces_killed_metric():
         value=f"{prettify(metric_force_15)}",
     )
     state_force_7.metric(
-        label="State Forces(Military & Police) Murdered in the past 7 years",
+        label="State Forces(Military & Police) Murdered in the past 8 years",
         value=f"{prettify(metric_force_now)}",
     )
 
@@ -190,7 +191,7 @@ def killerz():
             bubu,
             path=["state", "actor1"],
             values="norm_fatal",
-            title="Civilian Killers By State 2015-2022",
+            title="Civilian Killers By State 2015-2023",
         )
         st.plotly_chart(fig, use_container_width=True)
 
@@ -215,7 +216,7 @@ def state_forces_killers():
             force_now,
             path=["state", "actor1"],
             values="norm_fatal",
-            title="State Forces Killers by State 2015-2022",
+            title="State Forces Killers by State 2015-2023",
         )
         st.plotly_chart(fig, use_container_width=True)
 
@@ -232,7 +233,7 @@ def killers_sharia_state():
             pre_bu,
             path=["sharia_status", "actor1"],
             values="norm_fatal",
-            title="Civilian Killers By State's Sharia Status 1999-2015",
+            title="Civilian Killers in States By Sharia Status 1999-2015",
         )
         st.plotly_chart(fig, use_container_width=True)
 
@@ -241,7 +242,7 @@ def killers_sharia_state():
             bubu,
             path=["sharia_status", "actor1"],
             values="norm_fatal",
-            title="Civilian Killers By  State's Sharia Status 2015-2022",
+            title="Civilian Killers in States By Sharia Status 2015-2023",
         )
         st.plotly_chart(fig, use_container_width=True)
 
@@ -274,6 +275,32 @@ def geo_risk():
             orientation="h",
         )
         st.plotly_chart(fig)
+
+
+def bkp_killings():
+    less_than_2014,greater_than_2015 = bkp_deaths()
+    bkp_killing_2014,bkp_killing_2015 = st.columns(2)
+    with bkp_killing_2014:
+        fig = px.bar(
+            less_than_2014,
+            x="fatalities",
+            y="state",
+            title="Total Civilian Deaths In (Benue,Kaduna,Plateau) States 1999-2014",
+            labels={"state": "States", "fatalities": "Civilian Deaths"},
+            orientation="h",
+        )
+        st.plotly_chart(fig)
+    with bkp_killing_2015:
+        fig = px.bar(
+            greater_than_2015,
+            x="fatalities",
+            y="state",
+            title="Total Civilian Deaths In (Benue,Kaduna,Plateau) States 2015-2023",
+            labels={"state": "State", "fatalities": "Civilian Deaths"},
+            orientation="h",
+        )
+        st.plotly_chart(fig)
+
 
 
 with urlopen(
@@ -333,4 +360,5 @@ if __name__ == "__main__":
     state_forces_killers()
     killers_sharia_state()
     geo_risk()
+    bkp_killings()
     conflict_map()

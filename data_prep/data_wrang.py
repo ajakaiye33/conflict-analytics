@@ -391,3 +391,17 @@ def military_expend_now():
     return filter_data
     
     
+# sum of civilians killed in the following states: Benue, Kaduna, Plateau
+def bkp_deaths():
+    bkp = civilian_victims[civilian_victims['state'].isin(['Benue','Kaduna','Plateau'])]
+    bkp_by1 = bkp[bkp['year'] <= 2014]
+    bkp_by2 = bkp[bkp['year'] >= 2015]
+    bkp_grp1 = bkp_by1.groupby(['state']).agg({'fatalities':'sum'}).reset_index()
+    bkp_grp2 = bkp_by2.groupby(['state']).agg({'fatalities':'sum'}).reset_index()
+    return bkp_grp1,bkp_grp2
+
+    # bkpb42015 = bkp_grp[bkp_grp['year'] <= 2014]
+    # bkpfrm2016 = bkp_grp[bkp_grp['year'] >= 2015]
+    # return bkpb42015, bkpfrm2016
+if __name__ == "__main__":
+    bkp_deaths()
