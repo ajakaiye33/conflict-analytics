@@ -400,8 +400,26 @@ def bkp_deaths():
     bkp_grp2 = bkp_by2.groupby(['state']).agg({'fatalities':'sum'}).reset_index()
     return bkp_grp1,bkp_grp2
 
-    # bkpb42015 = bkp_grp[bkp_grp['year'] <= 2014]
-    # bkpfrm2016 = bkp_grp[bkp_grp['year'] >= 2015]
-    # return bkpb42015, bkpfrm2016
-if __name__ == "__main__":
-    bkp_deaths()
+
+#souther Kaduna Killings
+def souther_kaduna_civilian_death():
+    kaduna = civilian_victims[civilian_victims['state'].isin(['Kaduna'])]
+    kad_2014 = kaduna[kaduna['year'] <= 2014]
+    kad_2015 = kaduna[kaduna['year'] >= 2015]
+    skcv_2014 = kad_2014[kad_2014['lga'].isin(["Chikun","Jaba","Jema'a","Kachia","Kaduna South","Kagarko","Kajuru","Kaura","Kauru","Lere","Sanga","Zangon Kataf"])]
+    others_2014 = kad_2014[~kad_2014['lga'].isin(["Chikun","Jaba","Jema'a","Kachia","Kaduna South","Kagarko","Kajuru","Kaura","Kauru","Lere","Sanga","Zangon Kataf"])]
+    skcv_2015 = kad_2015[kad_2015['lga'].isin(["Chikun","Jaba","Jema'a","Kachia","Kaduna South","Kagarko","Kajuru","Kaura","Kauru","Lere","Sanga","Zangon Kataf"])]
+    others_2015 = kad_2015[~kad_2015['lga'].isin(["Chikun","Jaba","Jema'a","Kachia","Kaduna South","Kagarko","Kajuru","Kaura","Kauru","Lere","Sanga","Zangon Kataf"])]
+    skcv_2014_grp = skcv_2014.groupby('lga').agg({'fatalities':'sum'}).reset_index()
+    others_2014_grp = others_2014.groupby('lga').agg({'fatalities':'sum'}).reset_index()
+    skcv_2015_grp = skcv_2015.groupby('lga').agg({'fatalities':'sum'}).reset_index()
+    others_2015_grp = others_2015.groupby('lga').agg({'fatalities':'sum'}).reset_index()
+    metrics_skv_2014 = sum(skcv_2014_grp['fatalities'].to_list())
+    metric_others_2014 = sum(others_2014_grp['fatalities'].to_list())
+    metric_skv_2015 = sum(skcv_2015_grp['fatalities'].to_list())
+    metric_others_2015 = sum(others_2015_grp['fatalities'].to_list())
+    return skcv_2014_grp,skcv_2015_grp,others_2014_grp,others_2015_grp,metrics_skv_2014,metric_skv_2015,metric_others_2014,metric_others_2015
+
+
+
+

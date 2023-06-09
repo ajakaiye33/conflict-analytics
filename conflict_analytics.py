@@ -21,6 +21,7 @@ from data_prep.data_wrang import state_forces_now
 from data_prep.data_wrang import military_expend_15
 from data_prep.data_wrang import military_expend_now
 from data_prep.data_wrang import bkp_deaths
+from data_prep.data_wrang import souther_kaduna_civilian_death
 
 
 matplotlib.use("agg")
@@ -301,6 +302,66 @@ def bkp_killings():
         )
         st.plotly_chart(fig)
 
+def killings_by_southern_lga():
+    sk_14,sk_15,oters_14,oters_15,met_14,met_15,met_other_14,met_other_15 = souther_kaduna_civilian_death()
+    southern_kd_killing_14, sothern_kd_killing_15 = st.columns(2)
+    metric_civilian_2014, metric_civilian_2015 = st.columns(2)
+    with southern_kd_killing_14:
+        fig = px.bar(
+            sk_14,
+            x="fatalities",
+            y="lga",
+            title="Civilians Killed in Southern Kaduna 1999-2014",
+            labels={'lga':'Local Govt Area', 'fatalities':'Civilian Deaths'},
+            orientation='h'
+        )
+        st.plotly_chart(fig)
+    metric_civilian_2014.metric(label="Total Southern Kaduna Civilian Killed",value=met_14)
+
+
+    with sothern_kd_killing_15:
+        fig = px.bar(
+            sk_15,
+            x="fatalities",
+            y="lga",
+            title="Civilians Killed in Southern Kaduna By LGA 2015-2023",
+            labels={'lga':'Local Govt Area', 'fatalities':'Civilian Deaths'},
+            orientation='h'
+        )
+        st.plotly_chart(fig)
+    metric_civilian_2015.metric(label="Total Southern Kaduna Civilian Killed",value=met_15)
+
+    otherx_14,otherx_15 = st.columns(2)
+    metric_other_14, metric_other_15 = st.columns(2)
+    with otherx_14:
+        fig = px.bar(
+            oters_14,
+            x="fatalities",
+            y="lga",
+            title="Civilians Killed in  Non-Southern-Kaduna By LGA 1999-2014",
+            labels={'lga':'Local Govt Area', 'fatalities':'Civilian Deaths'},
+            orientation='h'
+        )
+        st.plotly_chart(fig)
+    metric_other_14.metric(label="Total Non-Southern Kaduna civilian Killed",value=met_other_14)
+    
+    with otherx_15:
+        fig = px.bar(
+            oters_15,
+            x="fatalities",
+            y="lga",
+            title="Civilians Killed in Non-Southern-Kaduna By LGA 2015-2023",
+            labels={'lga':'Local Govt Area', 'fatalities':'Civilian Deaths'},
+            orientation='h'
+        )
+        st.plotly_chart(fig)
+    metric_other_15.metric(label="Total Non-Southern Kaduna civilian Killed",value=met_other_15)
+        
+
+    
+
+    
+
 
 
 with urlopen(
@@ -361,4 +422,5 @@ if __name__ == "__main__":
     killers_sharia_state()
     geo_risk()
     bkp_killings()
+    killings_by_southern_lga()
     conflict_map()
